@@ -1,27 +1,36 @@
 #+TITLE: My i3 config
-** i3
+** i3 version
 i3-gaps
 ** packages
--conky
+- conky
 status line
--pavcontrol
+
+- pavcontrol
 volume control
--scrot
+
+- scrot
 screenshot
--Gpicview
+
+- Gpicview
 image viewer
--Nautilus
+
+- Nautilus
 File manager
--Lxappearance
+
+- Lxappearance
 Theme manager
--rofi
+
+- rofi
 App launcher
--blueman-applet
+
+- blueman-applet
 bluetooth 
--nm-applet
+
+- nm-applet
 Network Manager
--ibus-daemon
--feh
+- ibus-daemon
+
+- feh
 Wallpaper
 
 
