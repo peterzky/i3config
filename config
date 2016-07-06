@@ -180,12 +180,9 @@ bindsym $mod+f exec nautilus
 # Switching between workspaces
 bindsym $mod+Tab workspace back_and_forth
 # Pulse Audio controls
-bindsym F12 exec --no-startup-id pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo +5% #increase sound volume
-bindsym F11 exec --no-startup-id pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo -5% #decrease sound volume
-bindsym F10 exec --no-startup-id pactl set-sink-mute alsa_output.pci-0000_00_1b.0.analog-stereo toggle # mute sound
+bindsym F12 exec --no-startup-id amixer -D pulse sset Master 5%+
+bindsym F11 exec --no-startup-id amixer -D pulse sset Master 5%-
 
-bindsym button9 exec --no-startup-id pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo +5% #increase sound volume
-bindsym button8 exec --no-startup-id pactl set-sink-volume alsa_output.pci-0000_00_1b.0.analog-stereo -5% #decrease sound volume
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 # increase screen brightness
 bindsym XF86MonBrightnessDown exec  --no-startup-id xbacklight -dec 10 # decrease screen brightness
