@@ -5,7 +5,7 @@ i3-gaps
 - conky
 status line
 
-- pavcontrol
+- pavucontrol
 volume control
 
 - scrot
