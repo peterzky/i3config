@@ -209,7 +209,7 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 # Screenshot
-bindsym Print exec scrot -u ~/Pictures/Screenshot%Y-%m-%d%H:%M:%S.png
+bindsym Print exec --no-startup-id scrot -u ~/Pictures/Screenshot%Y-%m-%d%H:%M:%S.png
 
 #Split Mode
 set $split_mode Launch: [s]horizontal [v]vertical
@@ -258,6 +258,7 @@ bar {
 	}
 } 
 
+exec --no-startup-id gnome-settings-daemon
 exec --no-startup-id blueman-applet
 exec --no-startup-id nm-applet
 exec --no-startup-id ibus-daemon
