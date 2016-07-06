@@ -209,7 +209,8 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 # Screenshot
-bindsym Print exec --no-startup-id scrot -u ~/Pictures/Screenshot%Y-%m-%d%H:%M:%S.png
+bindsym --release Print exec --no-startup-id scrot -u ~/Pictures/Screenshot%Y-%m-%d%H:%M:%S.png
+bindsym --release Shift+Print exec --no-startup-id scrot -s ~/Pictures/Screenshot%Y-%m-%d%H:%M:%S.png
 
 #Split Mode
 set $split_mode Launch: [s]horizontal [v]vertical

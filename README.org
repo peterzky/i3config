@@ -37,3 +37,5 @@ Wallpaper
 volume control
 
 
+
+** i3 and Gnome shell
