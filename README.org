@@ -33,4 +33,7 @@ Network Manager
 - feh
 Wallpaper
 
+- pasystray
+volume control
+
 
