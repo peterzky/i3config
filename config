@@ -131,10 +131,13 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 for_window [class=(?i)termite] border normal 5
+for_window [class="VirtualBox"] floating enable 
 for_window [class="mpv"] floating enable ; border none
+for_window [title="Library"] floating enable
+for_window [class="Vlc"] floating enable ; border none
 for_window [class="Steam"] floating enable
-# for_window [class="copyq"] floating enable
-for_window [class="Nautilus"] floating enable
+for_window [class="Thunar"] floating enable 
+for_window [class="Thunar"] border normal 0
 for_window [class="Lxappearance"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
@@ -146,12 +149,19 @@ for_window [class="Zeal"] floating enable
 for_window [class="systemamd"] floating enable
 for_window [class="Gpicview"] floating enable
 for_window [class="Pavucontrol"] floating enable
+for_window [class="Catfish"] floating enable
+for_window [class="WizNote"] floating enable
 
+# Make the currently focused window a scratchpad
+bindsym $mod+plus move scratchpad
+
+# Show the first scratchpad window
+bindsym $mod+minus scratchpad show
 
 bindsym $mod+bracketright focus right
 bindsym $mod+bracketleft focus left
 
-bindsym $mod+f exec nautilus
+bindsym $mod+f exec thunar
 # Switching between workspaces
 bindsym $mod+Tab workspace back_and_forth
 # Pulse Audio controls
@@ -235,11 +245,12 @@ bar {
 } 
 
 # exec --no-startup-id gnome-settings-daemon
+exec --no-startup-id thunar --daemon
 exec --no-startup-id blueman-applet
 exec --no-startup-id nm-applet
 exec --no-startup-id ibus-daemon
 exec --no-startup-id pasystray
-exec --no-startup-id zeal
+# exec --no-startup-id zeal
 exec --no-startup-id . /home/$USER/.config/i3/keyboard.sh
 exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/space_planet_surface_shadow_46631_1920x1080.jpg
 # exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/abstraction_geometry_shapes_colors_93400_1920x1080.jpg
