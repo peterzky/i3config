@@ -1,0 +1,104 @@
+diff --git a/config b/config
+index 80fccf8..3347ee1 100644
+--- a/config
++++ b/config
+@@ -72,9 +72,9 @@ bindsym $mod+a focus parent
+ 
+ # focus the child container
+ #bindsym $mod+d focus child
+-workspace 1 output DVI-D-0
+-workspace 2 output DVI-I-1
+-workspace 3 output HDMI-0
++# workspace 1 output DVI-D-0
++# workspace 2 output DVI-I-1
++# workspace 3 output HDMI-0
+ # switch to workspace
+ bindsym $mod+1 workspace 1
+ bindsym $mod+2 workspace 2
+@@ -166,8 +166,8 @@ bindsym $mod+f exec thunar
+ # Switching between workspaces
+ bindsym $mod+Tab workspace back_and_forth
+ # Pulse Audio controls
+-bindsym F12 exec --no-startup-id amixer -D pulse sset Master 5%+
+-bindsym F11 exec --no-startup-id amixer -D pulse sset Master 5%-
++bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+
++bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%-
+ 
+ # Sreen brightness controls
+ bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 # increase screen brightness
+@@ -195,8 +195,8 @@ bindsym XF86AudioNext exec playerctl next
+ bindsym XF86AudioPrev exec playerctl previous
+ 
+ # Screenshot
+-bindsym --release Print exec --no-startup-id scrot -u ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+-bindsym --release Shift+Print exec --no-startup-id scrot -s ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
++bindsym --release XF86LaunchA exec --no-startup-id scrot -u ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
++bindsym --release Shift+XF86LaunchA exec --no-startup-id scrot -s ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+ 
+ #Split Mode
+ set $split_mode Launch: [s]horizontal [v]vertical
+@@ -231,7 +231,7 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color
+ bar {
+     #enable transparent i3 bar
+     # i3bar_command i3bar -t
+-    tray_output DVI-I-1
++    # tray_output DVI-I-1
+     position top
+   	# status_command i3blocks -c ~/.config/i3/i3blocks.conf
+     status_command ~/.config/i3/conky-i3.sh
+@@ -254,14 +254,14 @@ exec --no-startup-id ibus-daemon --xim
+ exec --no-startup-id pasystray
+ exec --no-startup-id dunst
+ # disable screensaver 
+-exec --no-startup-id xset -dpms
+-exec --no-startup-id xset s off
++# exec --no-startup-id xset -dpms
++# exec --no-startup-id xset s off
+ # exec --no-startup-id zeal
+ exec --no-startup-id . /home/$USER/.config/i3/keyboard.sh
+ # exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/space_planet_surface_shadow_46631_1920x1080.jpg
+ # exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/abstraction_geometry_shapes_colors_93400_1920x1080.jpg
+ exec_always --no-startup-id feh --bg-fill ~/btsync/Screenshots/dva.png 
+-exec --no-startup-id compton --backend glx --vsync opengl-swc --unredir-if-possible --glx-no-stencil --glx-no-rebind-pixmap --xrender-sync-fence 
++exec --no-startup-id compton -f
+ 
+ # Gaps config
+ gaps inner 8
+diff --git a/conky.conf b/conky.conf
+index ee4eb09..62002ca 100644
+--- a/conky.conf
++++ b/conky.conf
+@@ -36,16 +36,16 @@ cpu_avg_samples 2
+ TEXT
+ 
+ # JSON for i3bar
+-[{"full_text": "${downspeed eno1}↓","color":"\#26A65B","separator": false,"min_width":"00000%","separator_block_width":1},
+-{"full_text":"${upspeed eno1}↑", "color":"\#CF000F","min_width":"00000%"},
++[{"full_text": "${downspeed wlp3s0}↓","color":"\#26A65B","separator": false,"min_width":"00000%","separator_block_width":1},
++{"full_text":"${upspeed wlp3s0}↑", "color":"\#CF000F","min_width":"00000%"},
+ {"full_text": "cpu: ${cpu}%-${hwmon 0 temp 1}c", "color":"\#cf6a4c"},
+ {"full_text": "ram: $mem","color":"\#cda869"},
+ # {"full_text": "mem:", "separator": false, "separator_block_width":3},
+ # {"full_text": "${memperc}%", "min_width":"000%", "separator": false, "separator_block_width":3, "color":"${if_match ${memperc} < 33}\#7f9f7f${else}${if_match ${memperc} > 66}\#dca3a3${else}\#c3bf9f${endif}${endif}"},
+ # {"full_text": "${mem}/${memmax}", "color":"\#83b3a3"},
+ {"full_text": "vol: ${exec ~/.config/i3/volume }", "color":"\#9b703f" },
+-# {"full_text": "bat:", "separator": false, "separator_block_width":3},
+-# {"full_text": "${battery_percent BAT0}%", "min_width":"00%", "color":"${if_match ${battery_percent BAT0} > 66}\#7f9f7f${else}${if_match ${battery_percent BAT0} < 33}\#dca3a3${else}\#c3bf9f${endif}${endif}"},
++{"full_text": "bat:", "separator": false, "separator_block_width":3},
++{"full_text": "${battery_percent BAT0}%", "min_width":"00%", "color":"${if_match ${battery_percent BAT0} > 66}\#7f9f7f${else}${if_match ${battery_percent BAT0} < 33}\#dca3a3${else}\#c3bf9f${endif}${endif}"},
+ {"full_text": "${time %a, %d.%m.%Y}", "color":"\#afc4db"}, 
+ {"full_text": "${time %H:%M}", "color":"\#8f9d6a"}
+ ],
+\ No newline at end of file
+diff --git a/keyboard.sh b/keyboard.sh
+index 5a28bcb..32dce6a 100755
+--- a/keyboard.sh
++++ b/keyboard.sh
+@@ -1,6 +1,6 @@
+ #!/bin/sh
+ sleep 2
+-setxkbmap -option ctrl:nocaps -option altwin:swap_alt_win
++setxkbmap -option ctrl:nocaps 
+ # setxkbmap -option ctrl:nocaps 
+ sleep 1
+ xcape -e 'Control_L=Escape'
