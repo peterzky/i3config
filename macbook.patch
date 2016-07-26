@@ -1,0 +1,78 @@
+From feade2f1cd1ce2a14bb3e8c884330416511f45d2 Mon Sep 17 00:00:00 2001
+From: peterzky <378096232@qq.com>
+Date: Tue, 26 Jul 2016 12:28:14 +0800
+Subject: [PATCH] initial commit
+
+---
+ config | 22 +++++++++++-----------
+ 1 file changed, 11 insertions(+), 11 deletions(-)
+
+diff --git a/config b/config
+index 80fccf8..3347ee1 100644
+--- a/config
++++ b/config
+@@ -72,9 +72,9 @@ bindsym $mod+a focus parent
+ 
+ # focus the child container
+ #bindsym $mod+d focus child
+-workspace 1 output DVI-D-0
+-workspace 2 output DVI-I-1
+-workspace 3 output HDMI-0
++# workspace 1 output DVI-D-0
++# workspace 2 output DVI-I-1
++# workspace 3 output HDMI-0
+ # switch to workspace
+ bindsym $mod+1 workspace 1
+ bindsym $mod+2 workspace 2
+@@ -166,8 +166,8 @@ bindsym $mod+f exec thunar
+ # Switching between workspaces
+ bindsym $mod+Tab workspace back_and_forth
+ # Pulse Audio controls
+-bindsym F12 exec --no-startup-id amixer -D pulse sset Master 5%+
+-bindsym F11 exec --no-startup-id amixer -D pulse sset Master 5%-
++bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+
++bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%-
+ 
+ # Sreen brightness controls
+ bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 # increase screen brightness
+@@ -195,8 +195,8 @@ bindsym XF86AudioNext exec playerctl next
+ bindsym XF86AudioPrev exec playerctl previous
+ 
+ # Screenshot
+-bindsym --release Print exec --no-startup-id scrot -u ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+-bindsym --release Shift+Print exec --no-startup-id scrot -s ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
++bindsym --release XF86LaunchA exec --no-startup-id scrot -u ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
++bindsym --release Shift+XF86LaunchA exec --no-startup-id scrot -s ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+ 
+ #Split Mode
+ set $split_mode Launch: [s]horizontal [v]vertical
+@@ -231,7 +231,7 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color
+ bar {
+     #enable transparent i3 bar
+     # i3bar_command i3bar -t
+-    tray_output DVI-I-1
++    # tray_output DVI-I-1
+     position top
+   	# status_command i3blocks -c ~/.config/i3/i3blocks.conf
+     status_command ~/.config/i3/conky-i3.sh
+@@ -254,14 +254,14 @@ exec --no-startup-id ibus-daemon --xim
+ exec --no-startup-id pasystray
+ exec --no-startup-id dunst
+ # disable screensaver 
+-exec --no-startup-id xset -dpms
+-exec --no-startup-id xset s off
++# exec --no-startup-id xset -dpms
++# exec --no-startup-id xset s off
+ # exec --no-startup-id zeal
+ exec --no-startup-id . /home/$USER/.config/i3/keyboard.sh
+ # exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/space_planet_surface_shadow_46631_1920x1080.jpg
+ # exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/abstraction_geometry_shapes_colors_93400_1920x1080.jpg
+ exec_always --no-startup-id feh --bg-fill ~/btsync/Screenshots/dva.png 
+-exec --no-startup-id compton --backend glx --vsync opengl-swc --unredir-if-possible --glx-no-stencil --glx-no-rebind-pixmap --xrender-sync-fence 
++exec --no-startup-id compton -f
+ 
+ # Gaps config
+ gaps inner 8
+-- 
+2.9.0
+
