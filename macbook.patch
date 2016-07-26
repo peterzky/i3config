@@ -1,7 +1,7 @@
 From feade2f1cd1ce2a14bb3e8c884330416511f45d2 Mon Sep 17 00:00:00 2001
 From: peterzky <378096232@qq.com>
 Date: Tue, 26 Jul 2016 12:28:14 +0800
-Subject: [PATCH 1/4] initial commit
+Subject: [PATCH 1/6] initial commit
 
 ---
  config | 22 +++++++++++-----------
@@ -80,7 +80,7 @@ index 80fccf8..3347ee1 100644
 From 656addb4dc87d482b2c1d26bc34121c872483b73 Mon Sep 17 00:00:00 2001
 From: peterzky <378096232@qq.com>
 Date: Tue, 26 Jul 2016 12:32:50 +0800
-Subject: [PATCH 2/4] generate patch file
+Subject: [PATCH 2/6] generate patch file
 
 ---
  macbook.patch | 78 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -178,7 +178,7 @@ index 0000000..b70b805
 From e2b09250dfa6e602e149d7fb91c71571c8e0b1f0 Mon Sep 17 00:00:00 2001
 From: peterzky <378096232@qq.com>
 Date: Tue, 26 Jul 2016 12:40:02 +0800
-Subject: [PATCH 3/4] remove win alt swap
+Subject: [PATCH 3/6] remove win alt swap
 
 ---
  keyboard.sh | 2 +-
@@ -203,7 +203,7 @@ index 5a28bcb..32dce6a 100755
 From d6eade1885ea55d247a2e162981358def804698a Mon Sep 17 00:00:00 2001
 From: peterzky <378096232@qq.com>
 Date: Tue, 26 Jul 2016 12:43:55 +0800
-Subject: [PATCH 4/4] generate patch file for macbook air
+Subject: [PATCH 4/6] generate patch file for macbook air
 
 ---
  macbook.patch     |  78 ---------------------
@@ -503,6 +503,1288 @@ index 0000000..8ce449a
 +-- 
 +2.9.0
 +
+-- 
+2.9.0
+
+
+From 570679326145d1a4a66c1ed1c3b6a46499ff7e26 Mon Sep 17 00:00:00 2001
+From: peterzky <378096232@qq.com>
+Date: Tue, 26 Jul 2016 12:59:30 +0800
+Subject: [PATCH 5/6] update patch
+
+---
+ macbook.patch     | 508 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ macbook_air.patch | 201 ---------------------
+ 2 files changed, 508 insertions(+), 201 deletions(-)
+ create mode 100644 macbook.patch
+ delete mode 100644 macbook_air.patch
+
+diff --git a/macbook.patch b/macbook.patch
+new file mode 100644
+index 0000000..2f6164b
+--- /dev/null
++++ b/macbook.patch
+@@ -0,0 +1,508 @@
++From feade2f1cd1ce2a14bb3e8c884330416511f45d2 Mon Sep 17 00:00:00 2001
++From: peterzky <378096232@qq.com>
++Date: Tue, 26 Jul 2016 12:28:14 +0800
++Subject: [PATCH 1/4] initial commit
++
++---
++ config | 22 +++++++++++-----------
++ 1 file changed, 11 insertions(+), 11 deletions(-)
++
++diff --git a/config b/config
++index 80fccf8..3347ee1 100644
++--- a/config
+++++ b/config
++@@ -72,9 +72,9 @@ bindsym $mod+a focus parent
++ 
++ # focus the child container
++ #bindsym $mod+d focus child
++-workspace 1 output DVI-D-0
++-workspace 2 output DVI-I-1
++-workspace 3 output HDMI-0
+++# workspace 1 output DVI-D-0
+++# workspace 2 output DVI-I-1
+++# workspace 3 output HDMI-0
++ # switch to workspace
++ bindsym $mod+1 workspace 1
++ bindsym $mod+2 workspace 2
++@@ -166,8 +166,8 @@ bindsym $mod+f exec thunar
++ # Switching between workspaces
++ bindsym $mod+Tab workspace back_and_forth
++ # Pulse Audio controls
++-bindsym F12 exec --no-startup-id amixer -D pulse sset Master 5%+
++-bindsym F11 exec --no-startup-id amixer -D pulse sset Master 5%-
+++bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+
+++bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%-
++ 
++ # Sreen brightness controls
++ bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 # increase screen brightness
++@@ -195,8 +195,8 @@ bindsym XF86AudioNext exec playerctl next
++ bindsym XF86AudioPrev exec playerctl previous
++ 
++ # Screenshot
++-bindsym --release Print exec --no-startup-id scrot -u ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
++-bindsym --release Shift+Print exec --no-startup-id scrot -s ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+++bindsym --release XF86LaunchA exec --no-startup-id scrot -u ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+++bindsym --release Shift+XF86LaunchA exec --no-startup-id scrot -s ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
++ 
++ #Split Mode
++ set $split_mode Launch: [s]horizontal [v]vertical
++@@ -231,7 +231,7 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color
++ bar {
++     #enable transparent i3 bar
++     # i3bar_command i3bar -t
++-    tray_output DVI-I-1
+++    # tray_output DVI-I-1
++     position top
++   	# status_command i3blocks -c ~/.config/i3/i3blocks.conf
++     status_command ~/.config/i3/conky-i3.sh
++@@ -254,14 +254,14 @@ exec --no-startup-id ibus-daemon --xim
++ exec --no-startup-id pasystray
++ exec --no-startup-id dunst
++ # disable screensaver 
++-exec --no-startup-id xset -dpms
++-exec --no-startup-id xset s off
+++# exec --no-startup-id xset -dpms
+++# exec --no-startup-id xset s off
++ # exec --no-startup-id zeal
++ exec --no-startup-id . /home/$USER/.config/i3/keyboard.sh
++ # exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/space_planet_surface_shadow_46631_1920x1080.jpg
++ # exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/abstraction_geometry_shapes_colors_93400_1920x1080.jpg
++ exec_always --no-startup-id feh --bg-fill ~/btsync/Screenshots/dva.png 
++-exec --no-startup-id compton --backend glx --vsync opengl-swc --unredir-if-possible --glx-no-stencil --glx-no-rebind-pixmap --xrender-sync-fence 
+++exec --no-startup-id compton -f
++ 
++ # Gaps config
++ gaps inner 8
++-- 
++2.9.0
++
++
++From 656addb4dc87d482b2c1d26bc34121c872483b73 Mon Sep 17 00:00:00 2001
++From: peterzky <378096232@qq.com>
++Date: Tue, 26 Jul 2016 12:32:50 +0800
++Subject: [PATCH 2/4] generate patch file
++
++---
++ macbook.patch | 78 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ 1 file changed, 78 insertions(+)
++ create mode 100644 macbook.patch
++
++diff --git a/macbook.patch b/macbook.patch
++new file mode 100644
++index 0000000..b70b805
++--- /dev/null
+++++ b/macbook.patch
++@@ -0,0 +1,78 @@
+++From feade2f1cd1ce2a14bb3e8c884330416511f45d2 Mon Sep 17 00:00:00 2001
+++From: peterzky <378096232@qq.com>
+++Date: Tue, 26 Jul 2016 12:28:14 +0800
+++Subject: [PATCH] initial commit
+++
+++---
+++ config | 22 +++++++++++-----------
+++ 1 file changed, 11 insertions(+), 11 deletions(-)
+++
+++diff --git a/config b/config
+++index 80fccf8..3347ee1 100644
+++--- a/config
++++++ b/config
+++@@ -72,9 +72,9 @@ bindsym $mod+a focus parent
+++ 
+++ # focus the child container
+++ #bindsym $mod+d focus child
+++-workspace 1 output DVI-D-0
+++-workspace 2 output DVI-I-1
+++-workspace 3 output HDMI-0
++++# workspace 1 output DVI-D-0
++++# workspace 2 output DVI-I-1
++++# workspace 3 output HDMI-0
+++ # switch to workspace
+++ bindsym $mod+1 workspace 1
+++ bindsym $mod+2 workspace 2
+++@@ -166,8 +166,8 @@ bindsym $mod+f exec thunar
+++ # Switching between workspaces
+++ bindsym $mod+Tab workspace back_and_forth
+++ # Pulse Audio controls
+++-bindsym F12 exec --no-startup-id amixer -D pulse sset Master 5%+
+++-bindsym F11 exec --no-startup-id amixer -D pulse sset Master 5%-
++++bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+
++++bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%-
+++ 
+++ # Sreen brightness controls
+++ bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 # increase screen brightness
+++@@ -195,8 +195,8 @@ bindsym XF86AudioNext exec playerctl next
+++ bindsym XF86AudioPrev exec playerctl previous
+++ 
+++ # Screenshot
+++-bindsym --release Print exec --no-startup-id scrot -u ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+++-bindsym --release Shift+Print exec --no-startup-id scrot -s ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
++++bindsym --release XF86LaunchA exec --no-startup-id scrot -u ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
++++bindsym --release Shift+XF86LaunchA exec --no-startup-id scrot -s ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+++ 
+++ #Split Mode
+++ set $split_mode Launch: [s]horizontal [v]vertical
+++@@ -231,7 +231,7 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color
+++ bar {
+++     #enable transparent i3 bar
+++     # i3bar_command i3bar -t
+++-    tray_output DVI-I-1
++++    # tray_output DVI-I-1
+++     position top
+++   	# status_command i3blocks -c ~/.config/i3/i3blocks.conf
+++     status_command ~/.config/i3/conky-i3.sh
+++@@ -254,14 +254,14 @@ exec --no-startup-id ibus-daemon --xim
+++ exec --no-startup-id pasystray
+++ exec --no-startup-id dunst
+++ # disable screensaver 
+++-exec --no-startup-id xset -dpms
+++-exec --no-startup-id xset s off
++++# exec --no-startup-id xset -dpms
++++# exec --no-startup-id xset s off
+++ # exec --no-startup-id zeal
+++ exec --no-startup-id . /home/$USER/.config/i3/keyboard.sh
+++ # exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/space_planet_surface_shadow_46631_1920x1080.jpg
+++ # exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/abstraction_geometry_shapes_colors_93400_1920x1080.jpg
+++ exec_always --no-startup-id feh --bg-fill ~/btsync/Screenshots/dva.png 
+++-exec --no-startup-id compton --backend glx --vsync opengl-swc --unredir-if-possible --glx-no-stencil --glx-no-rebind-pixmap --xrender-sync-fence 
++++exec --no-startup-id compton -f
+++ 
+++ # Gaps config
+++ gaps inner 8
+++-- 
+++2.9.0
+++
++-- 
++2.9.0
++
++
++From e2b09250dfa6e602e149d7fb91c71571c8e0b1f0 Mon Sep 17 00:00:00 2001
++From: peterzky <378096232@qq.com>
++Date: Tue, 26 Jul 2016 12:40:02 +0800
++Subject: [PATCH 3/4] remove win alt swap
++
++---
++ keyboard.sh | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/keyboard.sh b/keyboard.sh
++index 5a28bcb..32dce6a 100755
++--- a/keyboard.sh
+++++ b/keyboard.sh
++@@ -1,6 +1,6 @@
++ #!/bin/sh
++ sleep 2
++-setxkbmap -option ctrl:nocaps -option altwin:swap_alt_win
+++setxkbmap -option ctrl:nocaps 
++ # setxkbmap -option ctrl:nocaps 
++ sleep 1
++ xcape -e 'Control_L=Escape'
++-- 
++2.9.0
++
++
++From d6eade1885ea55d247a2e162981358def804698a Mon Sep 17 00:00:00 2001
++From: peterzky <378096232@qq.com>
++Date: Tue, 26 Jul 2016 12:43:55 +0800
++Subject: [PATCH 4/4] generate patch file for macbook air
++
++---
++ macbook.patch     |  78 ---------------------
++ macbook_air.patch | 201 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ 2 files changed, 201 insertions(+), 78 deletions(-)
++ delete mode 100644 macbook.patch
++ create mode 100644 macbook_air.patch
++
++diff --git a/macbook.patch b/macbook.patch
++deleted file mode 100644
++index b70b805..0000000
++--- a/macbook.patch
+++++ /dev/null
++@@ -1,78 +0,0 @@
++-From feade2f1cd1ce2a14bb3e8c884330416511f45d2 Mon Sep 17 00:00:00 2001
++-From: peterzky <378096232@qq.com>
++-Date: Tue, 26 Jul 2016 12:28:14 +0800
++-Subject: [PATCH] initial commit
++-
++----
++- config | 22 +++++++++++-----------
++- 1 file changed, 11 insertions(+), 11 deletions(-)
++-
++-diff --git a/config b/config
++-index 80fccf8..3347ee1 100644
++---- a/config
++-+++ b/config
++-@@ -72,9 +72,9 @@ bindsym $mod+a focus parent
++- 
++- # focus the child container
++- #bindsym $mod+d focus child
++--workspace 1 output DVI-D-0
++--workspace 2 output DVI-I-1
++--workspace 3 output HDMI-0
++-+# workspace 1 output DVI-D-0
++-+# workspace 2 output DVI-I-1
++-+# workspace 3 output HDMI-0
++- # switch to workspace
++- bindsym $mod+1 workspace 1
++- bindsym $mod+2 workspace 2
++-@@ -166,8 +166,8 @@ bindsym $mod+f exec thunar
++- # Switching between workspaces
++- bindsym $mod+Tab workspace back_and_forth
++- # Pulse Audio controls
++--bindsym F12 exec --no-startup-id amixer -D pulse sset Master 5%+
++--bindsym F11 exec --no-startup-id amixer -D pulse sset Master 5%-
++-+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+
++-+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%-
++- 
++- # Sreen brightness controls
++- bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 # increase screen brightness
++-@@ -195,8 +195,8 @@ bindsym XF86AudioNext exec playerctl next
++- bindsym XF86AudioPrev exec playerctl previous
++- 
++- # Screenshot
++--bindsym --release Print exec --no-startup-id scrot -u ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
++--bindsym --release Shift+Print exec --no-startup-id scrot -s ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
++-+bindsym --release XF86LaunchA exec --no-startup-id scrot -u ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
++-+bindsym --release Shift+XF86LaunchA exec --no-startup-id scrot -s ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
++- 
++- #Split Mode
++- set $split_mode Launch: [s]horizontal [v]vertical
++-@@ -231,7 +231,7 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color
++- bar {
++-     #enable transparent i3 bar
++-     # i3bar_command i3bar -t
++--    tray_output DVI-I-1
++-+    # tray_output DVI-I-1
++-     position top
++-   	# status_command i3blocks -c ~/.config/i3/i3blocks.conf
++-     status_command ~/.config/i3/conky-i3.sh
++-@@ -254,14 +254,14 @@ exec --no-startup-id ibus-daemon --xim
++- exec --no-startup-id pasystray
++- exec --no-startup-id dunst
++- # disable screensaver 
++--exec --no-startup-id xset -dpms
++--exec --no-startup-id xset s off
++-+# exec --no-startup-id xset -dpms
++-+# exec --no-startup-id xset s off
++- # exec --no-startup-id zeal
++- exec --no-startup-id . /home/$USER/.config/i3/keyboard.sh
++- # exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/space_planet_surface_shadow_46631_1920x1080.jpg
++- # exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/abstraction_geometry_shapes_colors_93400_1920x1080.jpg
++- exec_always --no-startup-id feh --bg-fill ~/btsync/Screenshots/dva.png 
++--exec --no-startup-id compton --backend glx --vsync opengl-swc --unredir-if-possible --glx-no-stencil --glx-no-rebind-pixmap --xrender-sync-fence 
++-+exec --no-startup-id compton -f
++- 
++- # Gaps config
++- gaps inner 8
++--- 
++-2.9.0
++-
++diff --git a/macbook_air.patch b/macbook_air.patch
++new file mode 100644
++index 0000000..8ce449a
++--- /dev/null
+++++ b/macbook_air.patch
++@@ -0,0 +1,201 @@
+++From feade2f1cd1ce2a14bb3e8c884330416511f45d2 Mon Sep 17 00:00:00 2001
+++From: peterzky <378096232@qq.com>
+++Date: Tue, 26 Jul 2016 12:28:14 +0800
+++Subject: [PATCH 1/3] initial commit
+++
+++---
+++ config | 22 +++++++++++-----------
+++ 1 file changed, 11 insertions(+), 11 deletions(-)
+++
+++diff --git a/config b/config
+++index 80fccf8..3347ee1 100644
+++--- a/config
++++++ b/config
+++@@ -72,9 +72,9 @@ bindsym $mod+a focus parent
+++ 
+++ # focus the child container
+++ #bindsym $mod+d focus child
+++-workspace 1 output DVI-D-0
+++-workspace 2 output DVI-I-1
+++-workspace 3 output HDMI-0
++++# workspace 1 output DVI-D-0
++++# workspace 2 output DVI-I-1
++++# workspace 3 output HDMI-0
+++ # switch to workspace
+++ bindsym $mod+1 workspace 1
+++ bindsym $mod+2 workspace 2
+++@@ -166,8 +166,8 @@ bindsym $mod+f exec thunar
+++ # Switching between workspaces
+++ bindsym $mod+Tab workspace back_and_forth
+++ # Pulse Audio controls
+++-bindsym F12 exec --no-startup-id amixer -D pulse sset Master 5%+
+++-bindsym F11 exec --no-startup-id amixer -D pulse sset Master 5%-
++++bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+
++++bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%-
+++ 
+++ # Sreen brightness controls
+++ bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 # increase screen brightness
+++@@ -195,8 +195,8 @@ bindsym XF86AudioNext exec playerctl next
+++ bindsym XF86AudioPrev exec playerctl previous
+++ 
+++ # Screenshot
+++-bindsym --release Print exec --no-startup-id scrot -u ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+++-bindsym --release Shift+Print exec --no-startup-id scrot -s ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
++++bindsym --release XF86LaunchA exec --no-startup-id scrot -u ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
++++bindsym --release Shift+XF86LaunchA exec --no-startup-id scrot -s ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+++ 
+++ #Split Mode
+++ set $split_mode Launch: [s]horizontal [v]vertical
+++@@ -231,7 +231,7 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color
+++ bar {
+++     #enable transparent i3 bar
+++     # i3bar_command i3bar -t
+++-    tray_output DVI-I-1
++++    # tray_output DVI-I-1
+++     position top
+++   	# status_command i3blocks -c ~/.config/i3/i3blocks.conf
+++     status_command ~/.config/i3/conky-i3.sh
+++@@ -254,14 +254,14 @@ exec --no-startup-id ibus-daemon --xim
+++ exec --no-startup-id pasystray
+++ exec --no-startup-id dunst
+++ # disable screensaver 
+++-exec --no-startup-id xset -dpms
+++-exec --no-startup-id xset s off
++++# exec --no-startup-id xset -dpms
++++# exec --no-startup-id xset s off
+++ # exec --no-startup-id zeal
+++ exec --no-startup-id . /home/$USER/.config/i3/keyboard.sh
+++ # exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/space_planet_surface_shadow_46631_1920x1080.jpg
+++ # exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/abstraction_geometry_shapes_colors_93400_1920x1080.jpg
+++ exec_always --no-startup-id feh --bg-fill ~/btsync/Screenshots/dva.png 
+++-exec --no-startup-id compton --backend glx --vsync opengl-swc --unredir-if-possible --glx-no-stencil --glx-no-rebind-pixmap --xrender-sync-fence 
++++exec --no-startup-id compton -f
+++ 
+++ # Gaps config
+++ gaps inner 8
+++-- 
+++2.9.0
+++
+++
+++From 656addb4dc87d482b2c1d26bc34121c872483b73 Mon Sep 17 00:00:00 2001
+++From: peterzky <378096232@qq.com>
+++Date: Tue, 26 Jul 2016 12:32:50 +0800
+++Subject: [PATCH 2/3] generate patch file
+++
+++---
+++ macbook.patch | 78 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++ 1 file changed, 78 insertions(+)
+++ create mode 100644 macbook.patch
+++
+++diff --git a/macbook.patch b/macbook.patch
+++new file mode 100644
+++index 0000000..b70b805
+++--- /dev/null
++++++ b/macbook.patch
+++@@ -0,0 +1,78 @@
++++From feade2f1cd1ce2a14bb3e8c884330416511f45d2 Mon Sep 17 00:00:00 2001
++++From: peterzky <378096232@qq.com>
++++Date: Tue, 26 Jul 2016 12:28:14 +0800
++++Subject: [PATCH] initial commit
++++
++++---
++++ config | 22 +++++++++++-----------
++++ 1 file changed, 11 insertions(+), 11 deletions(-)
++++
++++diff --git a/config b/config
++++index 80fccf8..3347ee1 100644
++++--- a/config
+++++++ b/config
++++@@ -72,9 +72,9 @@ bindsym $mod+a focus parent
++++ 
++++ # focus the child container
++++ #bindsym $mod+d focus child
++++-workspace 1 output DVI-D-0
++++-workspace 2 output DVI-I-1
++++-workspace 3 output HDMI-0
+++++# workspace 1 output DVI-D-0
+++++# workspace 2 output DVI-I-1
+++++# workspace 3 output HDMI-0
++++ # switch to workspace
++++ bindsym $mod+1 workspace 1
++++ bindsym $mod+2 workspace 2
++++@@ -166,8 +166,8 @@ bindsym $mod+f exec thunar
++++ # Switching between workspaces
++++ bindsym $mod+Tab workspace back_and_forth
++++ # Pulse Audio controls
++++-bindsym F12 exec --no-startup-id amixer -D pulse sset Master 5%+
++++-bindsym F11 exec --no-startup-id amixer -D pulse sset Master 5%-
+++++bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+
+++++bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%-
++++ 
++++ # Sreen brightness controls
++++ bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 # increase screen brightness
++++@@ -195,8 +195,8 @@ bindsym XF86AudioNext exec playerctl next
++++ bindsym XF86AudioPrev exec playerctl previous
++++ 
++++ # Screenshot
++++-bindsym --release Print exec --no-startup-id scrot -u ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
++++-bindsym --release Shift+Print exec --no-startup-id scrot -s ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+++++bindsym --release XF86LaunchA exec --no-startup-id scrot -u ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+++++bindsym --release Shift+XF86LaunchA exec --no-startup-id scrot -s ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
++++ 
++++ #Split Mode
++++ set $split_mode Launch: [s]horizontal [v]vertical
++++@@ -231,7 +231,7 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color
++++ bar {
++++     #enable transparent i3 bar
++++     # i3bar_command i3bar -t
++++-    tray_output DVI-I-1
+++++    # tray_output DVI-I-1
++++     position top
++++   	# status_command i3blocks -c ~/.config/i3/i3blocks.conf
++++     status_command ~/.config/i3/conky-i3.sh
++++@@ -254,14 +254,14 @@ exec --no-startup-id ibus-daemon --xim
++++ exec --no-startup-id pasystray
++++ exec --no-startup-id dunst
++++ # disable screensaver 
++++-exec --no-startup-id xset -dpms
++++-exec --no-startup-id xset s off
+++++# exec --no-startup-id xset -dpms
+++++# exec --no-startup-id xset s off
++++ # exec --no-startup-id zeal
++++ exec --no-startup-id . /home/$USER/.config/i3/keyboard.sh
++++ # exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/space_planet_surface_shadow_46631_1920x1080.jpg
++++ # exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/abstraction_geometry_shapes_colors_93400_1920x1080.jpg
++++ exec_always --no-startup-id feh --bg-fill ~/btsync/Screenshots/dva.png 
++++-exec --no-startup-id compton --backend glx --vsync opengl-swc --unredir-if-possible --glx-no-stencil --glx-no-rebind-pixmap --xrender-sync-fence 
+++++exec --no-startup-id compton -f
++++ 
++++ # Gaps config
++++ gaps inner 8
++++-- 
++++2.9.0
++++
+++-- 
+++2.9.0
+++
+++
+++From e2b09250dfa6e602e149d7fb91c71571c8e0b1f0 Mon Sep 17 00:00:00 2001
+++From: peterzky <378096232@qq.com>
+++Date: Tue, 26 Jul 2016 12:40:02 +0800
+++Subject: [PATCH 3/3] remove win alt swap
+++
+++---
+++ keyboard.sh | 2 +-
+++ 1 file changed, 1 insertion(+), 1 deletion(-)
+++
+++diff --git a/keyboard.sh b/keyboard.sh
+++index 5a28bcb..32dce6a 100755
+++--- a/keyboard.sh
++++++ b/keyboard.sh
+++@@ -1,6 +1,6 @@
+++ #!/bin/sh
+++ sleep 2
+++-setxkbmap -option ctrl:nocaps -option altwin:swap_alt_win
++++setxkbmap -option ctrl:nocaps 
+++ # setxkbmap -option ctrl:nocaps 
+++ sleep 1
+++ xcape -e 'Control_L=Escape'
+++-- 
+++2.9.0
+++
++-- 
++2.9.0
++
+diff --git a/macbook_air.patch b/macbook_air.patch
+deleted file mode 100644
+index 8ce449a..0000000
+--- a/macbook_air.patch
++++ /dev/null
+@@ -1,201 +0,0 @@
+-From feade2f1cd1ce2a14bb3e8c884330416511f45d2 Mon Sep 17 00:00:00 2001
+-From: peterzky <378096232@qq.com>
+-Date: Tue, 26 Jul 2016 12:28:14 +0800
+-Subject: [PATCH 1/3] initial commit
+-
+----
+- config | 22 +++++++++++-----------
+- 1 file changed, 11 insertions(+), 11 deletions(-)
+-
+-diff --git a/config b/config
+-index 80fccf8..3347ee1 100644
+---- a/config
+-+++ b/config
+-@@ -72,9 +72,9 @@ bindsym $mod+a focus parent
+- 
+- # focus the child container
+- #bindsym $mod+d focus child
+--workspace 1 output DVI-D-0
+--workspace 2 output DVI-I-1
+--workspace 3 output HDMI-0
+-+# workspace 1 output DVI-D-0
+-+# workspace 2 output DVI-I-1
+-+# workspace 3 output HDMI-0
+- # switch to workspace
+- bindsym $mod+1 workspace 1
+- bindsym $mod+2 workspace 2
+-@@ -166,8 +166,8 @@ bindsym $mod+f exec thunar
+- # Switching between workspaces
+- bindsym $mod+Tab workspace back_and_forth
+- # Pulse Audio controls
+--bindsym F12 exec --no-startup-id amixer -D pulse sset Master 5%+
+--bindsym F11 exec --no-startup-id amixer -D pulse sset Master 5%-
+-+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+
+-+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%-
+- 
+- # Sreen brightness controls
+- bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 # increase screen brightness
+-@@ -195,8 +195,8 @@ bindsym XF86AudioNext exec playerctl next
+- bindsym XF86AudioPrev exec playerctl previous
+- 
+- # Screenshot
+--bindsym --release Print exec --no-startup-id scrot -u ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+--bindsym --release Shift+Print exec --no-startup-id scrot -s ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+-+bindsym --release XF86LaunchA exec --no-startup-id scrot -u ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+-+bindsym --release Shift+XF86LaunchA exec --no-startup-id scrot -s ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+- 
+- #Split Mode
+- set $split_mode Launch: [s]horizontal [v]vertical
+-@@ -231,7 +231,7 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color
+- bar {
+-     #enable transparent i3 bar
+-     # i3bar_command i3bar -t
+--    tray_output DVI-I-1
+-+    # tray_output DVI-I-1
+-     position top
+-   	# status_command i3blocks -c ~/.config/i3/i3blocks.conf
+-     status_command ~/.config/i3/conky-i3.sh
+-@@ -254,14 +254,14 @@ exec --no-startup-id ibus-daemon --xim
+- exec --no-startup-id pasystray
+- exec --no-startup-id dunst
+- # disable screensaver 
+--exec --no-startup-id xset -dpms
+--exec --no-startup-id xset s off
+-+# exec --no-startup-id xset -dpms
+-+# exec --no-startup-id xset s off
+- # exec --no-startup-id zeal
+- exec --no-startup-id . /home/$USER/.config/i3/keyboard.sh
+- # exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/space_planet_surface_shadow_46631_1920x1080.jpg
+- # exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/abstraction_geometry_shapes_colors_93400_1920x1080.jpg
+- exec_always --no-startup-id feh --bg-fill ~/btsync/Screenshots/dva.png 
+--exec --no-startup-id compton --backend glx --vsync opengl-swc --unredir-if-possible --glx-no-stencil --glx-no-rebind-pixmap --xrender-sync-fence 
+-+exec --no-startup-id compton -f
+- 
+- # Gaps config
+- gaps inner 8
+--- 
+-2.9.0
+-
+-
+-From 656addb4dc87d482b2c1d26bc34121c872483b73 Mon Sep 17 00:00:00 2001
+-From: peterzky <378096232@qq.com>
+-Date: Tue, 26 Jul 2016 12:32:50 +0800
+-Subject: [PATCH 2/3] generate patch file
+-
+----
+- macbook.patch | 78 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+- 1 file changed, 78 insertions(+)
+- create mode 100644 macbook.patch
+-
+-diff --git a/macbook.patch b/macbook.patch
+-new file mode 100644
+-index 0000000..b70b805
+---- /dev/null
+-+++ b/macbook.patch
+-@@ -0,0 +1,78 @@
+-+From feade2f1cd1ce2a14bb3e8c884330416511f45d2 Mon Sep 17 00:00:00 2001
+-+From: peterzky <378096232@qq.com>
+-+Date: Tue, 26 Jul 2016 12:28:14 +0800
+-+Subject: [PATCH] initial commit
+-+
+-+---
+-+ config | 22 +++++++++++-----------
+-+ 1 file changed, 11 insertions(+), 11 deletions(-)
+-+
+-+diff --git a/config b/config
+-+index 80fccf8..3347ee1 100644
+-+--- a/config
+-++++ b/config
+-+@@ -72,9 +72,9 @@ bindsym $mod+a focus parent
+-+ 
+-+ # focus the child container
+-+ #bindsym $mod+d focus child
+-+-workspace 1 output DVI-D-0
+-+-workspace 2 output DVI-I-1
+-+-workspace 3 output HDMI-0
+-++# workspace 1 output DVI-D-0
+-++# workspace 2 output DVI-I-1
+-++# workspace 3 output HDMI-0
+-+ # switch to workspace
+-+ bindsym $mod+1 workspace 1
+-+ bindsym $mod+2 workspace 2
+-+@@ -166,8 +166,8 @@ bindsym $mod+f exec thunar
+-+ # Switching between workspaces
+-+ bindsym $mod+Tab workspace back_and_forth
+-+ # Pulse Audio controls
+-+-bindsym F12 exec --no-startup-id amixer -D pulse sset Master 5%+
+-+-bindsym F11 exec --no-startup-id amixer -D pulse sset Master 5%-
+-++bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+
+-++bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%-
+-+ 
+-+ # Sreen brightness controls
+-+ bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 # increase screen brightness
+-+@@ -195,8 +195,8 @@ bindsym XF86AudioNext exec playerctl next
+-+ bindsym XF86AudioPrev exec playerctl previous
+-+ 
+-+ # Screenshot
+-+-bindsym --release Print exec --no-startup-id scrot -u ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+-+-bindsym --release Shift+Print exec --no-startup-id scrot -s ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+-++bindsym --release XF86LaunchA exec --no-startup-id scrot -u ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+-++bindsym --release Shift+XF86LaunchA exec --no-startup-id scrot -s ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+-+ 
+-+ #Split Mode
+-+ set $split_mode Launch: [s]horizontal [v]vertical
+-+@@ -231,7 +231,7 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color
+-+ bar {
+-+     #enable transparent i3 bar
+-+     # i3bar_command i3bar -t
+-+-    tray_output DVI-I-1
+-++    # tray_output DVI-I-1
+-+     position top
+-+   	# status_command i3blocks -c ~/.config/i3/i3blocks.conf
+-+     status_command ~/.config/i3/conky-i3.sh
+-+@@ -254,14 +254,14 @@ exec --no-startup-id ibus-daemon --xim
+-+ exec --no-startup-id pasystray
+-+ exec --no-startup-id dunst
+-+ # disable screensaver 
+-+-exec --no-startup-id xset -dpms
+-+-exec --no-startup-id xset s off
+-++# exec --no-startup-id xset -dpms
+-++# exec --no-startup-id xset s off
+-+ # exec --no-startup-id zeal
+-+ exec --no-startup-id . /home/$USER/.config/i3/keyboard.sh
+-+ # exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/space_planet_surface_shadow_46631_1920x1080.jpg
+-+ # exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/abstraction_geometry_shapes_colors_93400_1920x1080.jpg
+-+ exec_always --no-startup-id feh --bg-fill ~/btsync/Screenshots/dva.png 
+-+-exec --no-startup-id compton --backend glx --vsync opengl-swc --unredir-if-possible --glx-no-stencil --glx-no-rebind-pixmap --xrender-sync-fence 
+-++exec --no-startup-id compton -f
+-+ 
+-+ # Gaps config
+-+ gaps inner 8
+-+-- 
+-+2.9.0
+-+
+--- 
+-2.9.0
+-
+-
+-From e2b09250dfa6e602e149d7fb91c71571c8e0b1f0 Mon Sep 17 00:00:00 2001
+-From: peterzky <378096232@qq.com>
+-Date: Tue, 26 Jul 2016 12:40:02 +0800
+-Subject: [PATCH 3/3] remove win alt swap
+-
+----
+- keyboard.sh | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/keyboard.sh b/keyboard.sh
+-index 5a28bcb..32dce6a 100755
+---- a/keyboard.sh
+-+++ b/keyboard.sh
+-@@ -1,6 +1,6 @@
+- #!/bin/sh
+- sleep 2
+--setxkbmap -option ctrl:nocaps -option altwin:swap_alt_win
+-+setxkbmap -option ctrl:nocaps 
+- # setxkbmap -option ctrl:nocaps 
+- sleep 1
+- xcape -e 'Control_L=Escape'
+--- 
+-2.9.0
+-
+-- 
+2.9.0
+
+
+From 27defe8b26ac340ab6cf4a15dbdbe21959e1db65 Mon Sep 17 00:00:00 2001
+From: peterzky <378096232@qq.com>
+Date: Tue, 26 Jul 2016 13:33:51 +0800
+Subject: [PATCH 6/6] fix battery
+
+---
+ conky.conf    |   4 +-
+ macbook.patch | 508 ----------------------------------------------------------
+ 2 files changed, 2 insertions(+), 510 deletions(-)
+ delete mode 100644 macbook.patch
+
+diff --git a/conky.conf b/conky.conf
+index ee4eb09..783be48 100644
+--- a/conky.conf
++++ b/conky.conf
+@@ -44,8 +44,8 @@ TEXT
+ # {"full_text": "${memperc}%", "min_width":"000%", "separator": false, "separator_block_width":3, "color":"${if_match ${memperc} < 33}\#7f9f7f${else}${if_match ${memperc} > 66}\#dca3a3${else}\#c3bf9f${endif}${endif}"},
+ # {"full_text": "${mem}/${memmax}", "color":"\#83b3a3"},
+ {"full_text": "vol: ${exec ~/.config/i3/volume }", "color":"\#9b703f" },
+-# {"full_text": "bat:", "separator": false, "separator_block_width":3},
+-# {"full_text": "${battery_percent BAT0}%", "min_width":"00%", "color":"${if_match ${battery_percent BAT0} > 66}\#7f9f7f${else}${if_match ${battery_percent BAT0} < 33}\#dca3a3${else}\#c3bf9f${endif}${endif}"},
++{"full_text": "bat:", "separator": false, "separator_block_width":3},
++{"full_text": "${battery_percent BAT0}%", "min_width":"00%", "color":"${if_match ${battery_percent BAT0} > 66}\#7f9f7f${else}${if_match ${battery_percent BAT0} < 33}\#dca3a3${else}\#c3bf9f${endif}${endif}"},
+ {"full_text": "${time %a, %d.%m.%Y}", "color":"\#afc4db"}, 
+ {"full_text": "${time %H:%M}", "color":"\#8f9d6a"}
+ ],
+\ No newline at end of file
+diff --git a/macbook.patch b/macbook.patch
+deleted file mode 100644
+index 2f6164b..0000000
+--- a/macbook.patch
++++ /dev/null
+@@ -1,508 +0,0 @@
+-From feade2f1cd1ce2a14bb3e8c884330416511f45d2 Mon Sep 17 00:00:00 2001
+-From: peterzky <378096232@qq.com>
+-Date: Tue, 26 Jul 2016 12:28:14 +0800
+-Subject: [PATCH 1/4] initial commit
+-
+----
+- config | 22 +++++++++++-----------
+- 1 file changed, 11 insertions(+), 11 deletions(-)
+-
+-diff --git a/config b/config
+-index 80fccf8..3347ee1 100644
+---- a/config
+-+++ b/config
+-@@ -72,9 +72,9 @@ bindsym $mod+a focus parent
+- 
+- # focus the child container
+- #bindsym $mod+d focus child
+--workspace 1 output DVI-D-0
+--workspace 2 output DVI-I-1
+--workspace 3 output HDMI-0
+-+# workspace 1 output DVI-D-0
+-+# workspace 2 output DVI-I-1
+-+# workspace 3 output HDMI-0
+- # switch to workspace
+- bindsym $mod+1 workspace 1
+- bindsym $mod+2 workspace 2
+-@@ -166,8 +166,8 @@ bindsym $mod+f exec thunar
+- # Switching between workspaces
+- bindsym $mod+Tab workspace back_and_forth
+- # Pulse Audio controls
+--bindsym F12 exec --no-startup-id amixer -D pulse sset Master 5%+
+--bindsym F11 exec --no-startup-id amixer -D pulse sset Master 5%-
+-+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+
+-+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%-
+- 
+- # Sreen brightness controls
+- bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 # increase screen brightness
+-@@ -195,8 +195,8 @@ bindsym XF86AudioNext exec playerctl next
+- bindsym XF86AudioPrev exec playerctl previous
+- 
+- # Screenshot
+--bindsym --release Print exec --no-startup-id scrot -u ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+--bindsym --release Shift+Print exec --no-startup-id scrot -s ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+-+bindsym --release XF86LaunchA exec --no-startup-id scrot -u ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+-+bindsym --release Shift+XF86LaunchA exec --no-startup-id scrot -s ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+- 
+- #Split Mode
+- set $split_mode Launch: [s]horizontal [v]vertical
+-@@ -231,7 +231,7 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color
+- bar {
+-     #enable transparent i3 bar
+-     # i3bar_command i3bar -t
+--    tray_output DVI-I-1
+-+    # tray_output DVI-I-1
+-     position top
+-   	# status_command i3blocks -c ~/.config/i3/i3blocks.conf
+-     status_command ~/.config/i3/conky-i3.sh
+-@@ -254,14 +254,14 @@ exec --no-startup-id ibus-daemon --xim
+- exec --no-startup-id pasystray
+- exec --no-startup-id dunst
+- # disable screensaver 
+--exec --no-startup-id xset -dpms
+--exec --no-startup-id xset s off
+-+# exec --no-startup-id xset -dpms
+-+# exec --no-startup-id xset s off
+- # exec --no-startup-id zeal
+- exec --no-startup-id . /home/$USER/.config/i3/keyboard.sh
+- # exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/space_planet_surface_shadow_46631_1920x1080.jpg
+- # exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/abstraction_geometry_shapes_colors_93400_1920x1080.jpg
+- exec_always --no-startup-id feh --bg-fill ~/btsync/Screenshots/dva.png 
+--exec --no-startup-id compton --backend glx --vsync opengl-swc --unredir-if-possible --glx-no-stencil --glx-no-rebind-pixmap --xrender-sync-fence 
+-+exec --no-startup-id compton -f
+- 
+- # Gaps config
+- gaps inner 8
+--- 
+-2.9.0
+-
+-
+-From 656addb4dc87d482b2c1d26bc34121c872483b73 Mon Sep 17 00:00:00 2001
+-From: peterzky <378096232@qq.com>
+-Date: Tue, 26 Jul 2016 12:32:50 +0800
+-Subject: [PATCH 2/4] generate patch file
+-
+----
+- macbook.patch | 78 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+- 1 file changed, 78 insertions(+)
+- create mode 100644 macbook.patch
+-
+-diff --git a/macbook.patch b/macbook.patch
+-new file mode 100644
+-index 0000000..b70b805
+---- /dev/null
+-+++ b/macbook.patch
+-@@ -0,0 +1,78 @@
+-+From feade2f1cd1ce2a14bb3e8c884330416511f45d2 Mon Sep 17 00:00:00 2001
+-+From: peterzky <378096232@qq.com>
+-+Date: Tue, 26 Jul 2016 12:28:14 +0800
+-+Subject: [PATCH] initial commit
+-+
+-+---
+-+ config | 22 +++++++++++-----------
+-+ 1 file changed, 11 insertions(+), 11 deletions(-)
+-+
+-+diff --git a/config b/config
+-+index 80fccf8..3347ee1 100644
+-+--- a/config
+-++++ b/config
+-+@@ -72,9 +72,9 @@ bindsym $mod+a focus parent
+-+ 
+-+ # focus the child container
+-+ #bindsym $mod+d focus child
+-+-workspace 1 output DVI-D-0
+-+-workspace 2 output DVI-I-1
+-+-workspace 3 output HDMI-0
+-++# workspace 1 output DVI-D-0
+-++# workspace 2 output DVI-I-1
+-++# workspace 3 output HDMI-0
+-+ # switch to workspace
+-+ bindsym $mod+1 workspace 1
+-+ bindsym $mod+2 workspace 2
+-+@@ -166,8 +166,8 @@ bindsym $mod+f exec thunar
+-+ # Switching between workspaces
+-+ bindsym $mod+Tab workspace back_and_forth
+-+ # Pulse Audio controls
+-+-bindsym F12 exec --no-startup-id amixer -D pulse sset Master 5%+
+-+-bindsym F11 exec --no-startup-id amixer -D pulse sset Master 5%-
+-++bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+
+-++bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%-
+-+ 
+-+ # Sreen brightness controls
+-+ bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 # increase screen brightness
+-+@@ -195,8 +195,8 @@ bindsym XF86AudioNext exec playerctl next
+-+ bindsym XF86AudioPrev exec playerctl previous
+-+ 
+-+ # Screenshot
+-+-bindsym --release Print exec --no-startup-id scrot -u ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+-+-bindsym --release Shift+Print exec --no-startup-id scrot -s ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+-++bindsym --release XF86LaunchA exec --no-startup-id scrot -u ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+-++bindsym --release Shift+XF86LaunchA exec --no-startup-id scrot -s ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+-+ 
+-+ #Split Mode
+-+ set $split_mode Launch: [s]horizontal [v]vertical
+-+@@ -231,7 +231,7 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color
+-+ bar {
+-+     #enable transparent i3 bar
+-+     # i3bar_command i3bar -t
+-+-    tray_output DVI-I-1
+-++    # tray_output DVI-I-1
+-+     position top
+-+   	# status_command i3blocks -c ~/.config/i3/i3blocks.conf
+-+     status_command ~/.config/i3/conky-i3.sh
+-+@@ -254,14 +254,14 @@ exec --no-startup-id ibus-daemon --xim
+-+ exec --no-startup-id pasystray
+-+ exec --no-startup-id dunst
+-+ # disable screensaver 
+-+-exec --no-startup-id xset -dpms
+-+-exec --no-startup-id xset s off
+-++# exec --no-startup-id xset -dpms
+-++# exec --no-startup-id xset s off
+-+ # exec --no-startup-id zeal
+-+ exec --no-startup-id . /home/$USER/.config/i3/keyboard.sh
+-+ # exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/space_planet_surface_shadow_46631_1920x1080.jpg
+-+ # exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/abstraction_geometry_shapes_colors_93400_1920x1080.jpg
+-+ exec_always --no-startup-id feh --bg-fill ~/btsync/Screenshots/dva.png 
+-+-exec --no-startup-id compton --backend glx --vsync opengl-swc --unredir-if-possible --glx-no-stencil --glx-no-rebind-pixmap --xrender-sync-fence 
+-++exec --no-startup-id compton -f
+-+ 
+-+ # Gaps config
+-+ gaps inner 8
+-+-- 
+-+2.9.0
+-+
+--- 
+-2.9.0
+-
+-
+-From e2b09250dfa6e602e149d7fb91c71571c8e0b1f0 Mon Sep 17 00:00:00 2001
+-From: peterzky <378096232@qq.com>
+-Date: Tue, 26 Jul 2016 12:40:02 +0800
+-Subject: [PATCH 3/4] remove win alt swap
+-
+----
+- keyboard.sh | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/keyboard.sh b/keyboard.sh
+-index 5a28bcb..32dce6a 100755
+---- a/keyboard.sh
+-+++ b/keyboard.sh
+-@@ -1,6 +1,6 @@
+- #!/bin/sh
+- sleep 2
+--setxkbmap -option ctrl:nocaps -option altwin:swap_alt_win
+-+setxkbmap -option ctrl:nocaps 
+- # setxkbmap -option ctrl:nocaps 
+- sleep 1
+- xcape -e 'Control_L=Escape'
+--- 
+-2.9.0
+-
+-
+-From d6eade1885ea55d247a2e162981358def804698a Mon Sep 17 00:00:00 2001
+-From: peterzky <378096232@qq.com>
+-Date: Tue, 26 Jul 2016 12:43:55 +0800
+-Subject: [PATCH 4/4] generate patch file for macbook air
+-
+----
+- macbook.patch     |  78 ---------------------
+- macbook_air.patch | 201 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
+- 2 files changed, 201 insertions(+), 78 deletions(-)
+- delete mode 100644 macbook.patch
+- create mode 100644 macbook_air.patch
+-
+-diff --git a/macbook.patch b/macbook.patch
+-deleted file mode 100644
+-index b70b805..0000000
+---- a/macbook.patch
+-+++ /dev/null
+-@@ -1,78 +0,0 @@
+--From feade2f1cd1ce2a14bb3e8c884330416511f45d2 Mon Sep 17 00:00:00 2001
+--From: peterzky <378096232@qq.com>
+--Date: Tue, 26 Jul 2016 12:28:14 +0800
+--Subject: [PATCH] initial commit
+--
+-----
+-- config | 22 +++++++++++-----------
+-- 1 file changed, 11 insertions(+), 11 deletions(-)
+--
+--diff --git a/config b/config
+--index 80fccf8..3347ee1 100644
+----- a/config
+--+++ b/config
+--@@ -72,9 +72,9 @@ bindsym $mod+a focus parent
+-- 
+-- # focus the child container
+-- #bindsym $mod+d focus child
+---workspace 1 output DVI-D-0
+---workspace 2 output DVI-I-1
+---workspace 3 output HDMI-0
+--+# workspace 1 output DVI-D-0
+--+# workspace 2 output DVI-I-1
+--+# workspace 3 output HDMI-0
+-- # switch to workspace
+-- bindsym $mod+1 workspace 1
+-- bindsym $mod+2 workspace 2
+--@@ -166,8 +166,8 @@ bindsym $mod+f exec thunar
+-- # Switching between workspaces
+-- bindsym $mod+Tab workspace back_and_forth
+-- # Pulse Audio controls
+---bindsym F12 exec --no-startup-id amixer -D pulse sset Master 5%+
+---bindsym F11 exec --no-startup-id amixer -D pulse sset Master 5%-
+--+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+
+--+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%-
+-- 
+-- # Sreen brightness controls
+-- bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 # increase screen brightness
+--@@ -195,8 +195,8 @@ bindsym XF86AudioNext exec playerctl next
+-- bindsym XF86AudioPrev exec playerctl previous
+-- 
+-- # Screenshot
+---bindsym --release Print exec --no-startup-id scrot -u ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+---bindsym --release Shift+Print exec --no-startup-id scrot -s ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+--+bindsym --release XF86LaunchA exec --no-startup-id scrot -u ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+--+bindsym --release Shift+XF86LaunchA exec --no-startup-id scrot -s ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+-- 
+-- #Split Mode
+-- set $split_mode Launch: [s]horizontal [v]vertical
+--@@ -231,7 +231,7 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color
+-- bar {
+--     #enable transparent i3 bar
+--     # i3bar_command i3bar -t
+---    tray_output DVI-I-1
+--+    # tray_output DVI-I-1
+--     position top
+--   	# status_command i3blocks -c ~/.config/i3/i3blocks.conf
+--     status_command ~/.config/i3/conky-i3.sh
+--@@ -254,14 +254,14 @@ exec --no-startup-id ibus-daemon --xim
+-- exec --no-startup-id pasystray
+-- exec --no-startup-id dunst
+-- # disable screensaver 
+---exec --no-startup-id xset -dpms
+---exec --no-startup-id xset s off
+--+# exec --no-startup-id xset -dpms
+--+# exec --no-startup-id xset s off
+-- # exec --no-startup-id zeal
+-- exec --no-startup-id . /home/$USER/.config/i3/keyboard.sh
+-- # exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/space_planet_surface_shadow_46631_1920x1080.jpg
+-- # exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/abstraction_geometry_shapes_colors_93400_1920x1080.jpg
+-- exec_always --no-startup-id feh --bg-fill ~/btsync/Screenshots/dva.png 
+---exec --no-startup-id compton --backend glx --vsync opengl-swc --unredir-if-possible --glx-no-stencil --glx-no-rebind-pixmap --xrender-sync-fence 
+--+exec --no-startup-id compton -f
+-- 
+-- # Gaps config
+-- gaps inner 8
+---- 
+--2.9.0
+--
+-diff --git a/macbook_air.patch b/macbook_air.patch
+-new file mode 100644
+-index 0000000..8ce449a
+---- /dev/null
+-+++ b/macbook_air.patch
+-@@ -0,0 +1,201 @@
+-+From feade2f1cd1ce2a14bb3e8c884330416511f45d2 Mon Sep 17 00:00:00 2001
+-+From: peterzky <378096232@qq.com>
+-+Date: Tue, 26 Jul 2016 12:28:14 +0800
+-+Subject: [PATCH 1/3] initial commit
+-+
+-+---
+-+ config | 22 +++++++++++-----------
+-+ 1 file changed, 11 insertions(+), 11 deletions(-)
+-+
+-+diff --git a/config b/config
+-+index 80fccf8..3347ee1 100644
+-+--- a/config
+-++++ b/config
+-+@@ -72,9 +72,9 @@ bindsym $mod+a focus parent
+-+ 
+-+ # focus the child container
+-+ #bindsym $mod+d focus child
+-+-workspace 1 output DVI-D-0
+-+-workspace 2 output DVI-I-1
+-+-workspace 3 output HDMI-0
+-++# workspace 1 output DVI-D-0
+-++# workspace 2 output DVI-I-1
+-++# workspace 3 output HDMI-0
+-+ # switch to workspace
+-+ bindsym $mod+1 workspace 1
+-+ bindsym $mod+2 workspace 2
+-+@@ -166,8 +166,8 @@ bindsym $mod+f exec thunar
+-+ # Switching between workspaces
+-+ bindsym $mod+Tab workspace back_and_forth
+-+ # Pulse Audio controls
+-+-bindsym F12 exec --no-startup-id amixer -D pulse sset Master 5%+
+-+-bindsym F11 exec --no-startup-id amixer -D pulse sset Master 5%-
+-++bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+
+-++bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%-
+-+ 
+-+ # Sreen brightness controls
+-+ bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 # increase screen brightness
+-+@@ -195,8 +195,8 @@ bindsym XF86AudioNext exec playerctl next
+-+ bindsym XF86AudioPrev exec playerctl previous
+-+ 
+-+ # Screenshot
+-+-bindsym --release Print exec --no-startup-id scrot -u ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+-+-bindsym --release Shift+Print exec --no-startup-id scrot -s ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+-++bindsym --release XF86LaunchA exec --no-startup-id scrot -u ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+-++bindsym --release Shift+XF86LaunchA exec --no-startup-id scrot -s ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+-+ 
+-+ #Split Mode
+-+ set $split_mode Launch: [s]horizontal [v]vertical
+-+@@ -231,7 +231,7 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color
+-+ bar {
+-+     #enable transparent i3 bar
+-+     # i3bar_command i3bar -t
+-+-    tray_output DVI-I-1
+-++    # tray_output DVI-I-1
+-+     position top
+-+   	# status_command i3blocks -c ~/.config/i3/i3blocks.conf
+-+     status_command ~/.config/i3/conky-i3.sh
+-+@@ -254,14 +254,14 @@ exec --no-startup-id ibus-daemon --xim
+-+ exec --no-startup-id pasystray
+-+ exec --no-startup-id dunst
+-+ # disable screensaver 
+-+-exec --no-startup-id xset -dpms
+-+-exec --no-startup-id xset s off
+-++# exec --no-startup-id xset -dpms
+-++# exec --no-startup-id xset s off
+-+ # exec --no-startup-id zeal
+-+ exec --no-startup-id . /home/$USER/.config/i3/keyboard.sh
+-+ # exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/space_planet_surface_shadow_46631_1920x1080.jpg
+-+ # exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/abstraction_geometry_shapes_colors_93400_1920x1080.jpg
+-+ exec_always --no-startup-id feh --bg-fill ~/btsync/Screenshots/dva.png 
+-+-exec --no-startup-id compton --backend glx --vsync opengl-swc --unredir-if-possible --glx-no-stencil --glx-no-rebind-pixmap --xrender-sync-fence 
+-++exec --no-startup-id compton -f
+-+ 
+-+ # Gaps config
+-+ gaps inner 8
+-+-- 
+-+2.9.0
+-+
+-+
+-+From 656addb4dc87d482b2c1d26bc34121c872483b73 Mon Sep 17 00:00:00 2001
+-+From: peterzky <378096232@qq.com>
+-+Date: Tue, 26 Jul 2016 12:32:50 +0800
+-+Subject: [PATCH 2/3] generate patch file
+-+
+-+---
+-+ macbook.patch | 78 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+-+ 1 file changed, 78 insertions(+)
+-+ create mode 100644 macbook.patch
+-+
+-+diff --git a/macbook.patch b/macbook.patch
+-+new file mode 100644
+-+index 0000000..b70b805
+-+--- /dev/null
+-++++ b/macbook.patch
+-+@@ -0,0 +1,78 @@
+-++From feade2f1cd1ce2a14bb3e8c884330416511f45d2 Mon Sep 17 00:00:00 2001
+-++From: peterzky <378096232@qq.com>
+-++Date: Tue, 26 Jul 2016 12:28:14 +0800
+-++Subject: [PATCH] initial commit
+-++
+-++---
+-++ config | 22 +++++++++++-----------
+-++ 1 file changed, 11 insertions(+), 11 deletions(-)
+-++
+-++diff --git a/config b/config
+-++index 80fccf8..3347ee1 100644
+-++--- a/config
+-+++++ b/config
+-++@@ -72,9 +72,9 @@ bindsym $mod+a focus parent
+-++ 
+-++ # focus the child container
+-++ #bindsym $mod+d focus child
+-++-workspace 1 output DVI-D-0
+-++-workspace 2 output DVI-I-1
+-++-workspace 3 output HDMI-0
+-+++# workspace 1 output DVI-D-0
+-+++# workspace 2 output DVI-I-1
+-+++# workspace 3 output HDMI-0
+-++ # switch to workspace
+-++ bindsym $mod+1 workspace 1
+-++ bindsym $mod+2 workspace 2
+-++@@ -166,8 +166,8 @@ bindsym $mod+f exec thunar
+-++ # Switching between workspaces
+-++ bindsym $mod+Tab workspace back_and_forth
+-++ # Pulse Audio controls
+-++-bindsym F12 exec --no-startup-id amixer -D pulse sset Master 5%+
+-++-bindsym F11 exec --no-startup-id amixer -D pulse sset Master 5%-
+-+++bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+
+-+++bindsym XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 5%-
+-++ 
+-++ # Sreen brightness controls
+-++ bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 # increase screen brightness
+-++@@ -195,8 +195,8 @@ bindsym XF86AudioNext exec playerctl next
+-++ bindsym XF86AudioPrev exec playerctl previous
+-++ 
+-++ # Screenshot
+-++-bindsym --release Print exec --no-startup-id scrot -u ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+-++-bindsym --release Shift+Print exec --no-startup-id scrot -s ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+-+++bindsym --release XF86LaunchA exec --no-startup-id scrot -u ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+-+++bindsym --release Shift+XF86LaunchA exec --no-startup-id scrot -s ~/btsync/Screenshots/Screenshot%Y-%m-%d%H:%M:%S.png
+-++ 
+-++ #Split Mode
+-++ set $split_mode Launch: [s]horizontal [v]vertical
+-++@@ -231,7 +231,7 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color
+-++ bar {
+-++     #enable transparent i3 bar
+-++     # i3bar_command i3bar -t
+-++-    tray_output DVI-I-1
+-+++    # tray_output DVI-I-1
+-++     position top
+-++   	# status_command i3blocks -c ~/.config/i3/i3blocks.conf
+-++     status_command ~/.config/i3/conky-i3.sh
+-++@@ -254,14 +254,14 @@ exec --no-startup-id ibus-daemon --xim
+-++ exec --no-startup-id pasystray
+-++ exec --no-startup-id dunst
+-++ # disable screensaver 
+-++-exec --no-startup-id xset -dpms
+-++-exec --no-startup-id xset s off
+-+++# exec --no-startup-id xset -dpms
+-+++# exec --no-startup-id xset s off
+-++ # exec --no-startup-id zeal
+-++ exec --no-startup-id . /home/$USER/.config/i3/keyboard.sh
+-++ # exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/space_planet_surface_shadow_46631_1920x1080.jpg
+-++ # exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/abstraction_geometry_shapes_colors_93400_1920x1080.jpg
+-++ exec_always --no-startup-id feh --bg-fill ~/btsync/Screenshots/dva.png 
+-++-exec --no-startup-id compton --backend glx --vsync opengl-swc --unredir-if-possible --glx-no-stencil --glx-no-rebind-pixmap --xrender-sync-fence 
+-+++exec --no-startup-id compton -f
+-++ 
+-++ # Gaps config
+-++ gaps inner 8
+-++-- 
+-++2.9.0
+-++
+-+-- 
+-+2.9.0
+-+
+-+
+-+From e2b09250dfa6e602e149d7fb91c71571c8e0b1f0 Mon Sep 17 00:00:00 2001
+-+From: peterzky <378096232@qq.com>
+-+Date: Tue, 26 Jul 2016 12:40:02 +0800
+-+Subject: [PATCH 3/3] remove win alt swap
+-+
+-+---
+-+ keyboard.sh | 2 +-
+-+ 1 file changed, 1 insertion(+), 1 deletion(-)
+-+
+-+diff --git a/keyboard.sh b/keyboard.sh
+-+index 5a28bcb..32dce6a 100755
+-+--- a/keyboard.sh
+-++++ b/keyboard.sh
+-+@@ -1,6 +1,6 @@
+-+ #!/bin/sh
+-+ sleep 2
+-+-setxkbmap -option ctrl:nocaps -option altwin:swap_alt_win
+-++setxkbmap -option ctrl:nocaps 
+-+ # setxkbmap -option ctrl:nocaps 
+-+ sleep 1
+-+ xcape -e 'Control_L=Escape'
+-+-- 
+-+2.9.0
+-+
+--- 
+-2.9.0
+-
 -- 
 2.9.0
 
