@@ -219,9 +219,10 @@ set $inactive-bg-color   #2f343f
 set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
 set $urgent-bg-color     #E53935
+set $focused-color   #2574A9
 
 #                       border              background         text                 indicator
-client.focused          $bg-color           $border          $text-color          #00ff00
+client.focused          $bg-color           $focused-color    $text-color          #00ff00
 client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
 client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
 client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
@@ -229,14 +230,14 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color      
 # bar
 bar {
     #enable transparent i3 bar
-    i3bar_command i3bar -t
+    # i3bar_command i3bar -t
     tray_output DVI-I-1
     position top
   	# status_command i3blocks -c ~/.config/i3/i3blocks.conf
     status_command ~/.config/i3/conky-i3.sh
 	colors {
     # the last two digit is transparency
-		background #2f343f30
+		background $bg-color
 	    	separator #757575
 		#                  border             background         text
 		focused_workspace  $bg-color          $bg-color          $text-color
@@ -251,13 +252,15 @@ exec --no-startup-id blueman-applet
 exec --no-startup-id nm-applet
 exec --no-startup-id ibus-daemon --xim
 exec --no-startup-id pasystray
+exec --no-startup-id dunst
 # disable screensaver 
 exec --no-startup-id xset -dpms
 exec --no-startup-id xset s off
 # exec --no-startup-id zeal
 exec --no-startup-id . /home/$USER/.config/i3/keyboard.sh
-exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/space_planet_surface_shadow_46631_1920x1080.jpg
+# exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/space_planet_surface_shadow_46631_1920x1080.jpg
 # exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/abstraction_geometry_shapes_colors_93400_1920x1080.jpg
+exec_always --no-startup-id feh --bg-fill ~/btsync/Screenshots/dva.png 
 exec --no-startup-id compton --backend glx --vsync opengl-swc --unredir-if-possible --glx-no-stencil --glx-no-rebind-pixmap --xrender-sync-fence 
 
 # Gaps config
