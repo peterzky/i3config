@@ -1,0 +1,56 @@
+! rofi settings
+
+rofi.color-enabled: true
+rofi.color-window: #404552, #404552, #404552
+rofi.color-normal: #404552, #ffffff, #404552, #404552, #ffc200
+rofi.color-active: #404552, #ffffff, #404552, #404552, #00ff00
+rofi.color-urgent: #404552, #ffffff, #404552, #404552, #ff0000
+
+/* Couleurs Tango */
+URxvt.foreground: #C8C8C8
+URxvt.background: [85]#000000
+URxvt.color0:     #2E3436
+URxvt.color1:     #CC0000
+URxvt.color2:     #4E9A06
+URxvt.color3:     #C4A000
+URxvt.color4:     #3465A4
+URxvt.color5:     #75507B
+URxvt.color6:     #06989A
+URxvt.color7:     #D3D7CF
+URxvt.color8:     #555753
+URxvt.color9:     #EF2929
+URxvt.color10:    #8AE234
+URxvt.color11:    #FCE94F
+URxvt.color12:    #729FCF
+URxvt.color13:    #AD7FA8
+URxvt.color14:    #34E2E2
+URxvt.color15:    #EEEEEC
+
+URxvt.bufferd: true
+URxvt.transparent: false
+URxvt.depth: 32
+! URxvt.fading:      40
+URxvt.font:     xft:Consolas:size=13,xft:Microsoft YaHei:size=14
+! URxvt.font: 9x15bold,xft:Bitstream Vera Sans Mono
+! URxvt.font:        xft:Hack:size=11
+URxvt.letterSpace: -1
+URxvt.cursorBlink: true
+
+URxvt.scrollBar:         false
+URxvt.scrollTtyOutput:   false
+URxvt.scrollWithBuffer:  true
+URxvt.scrollTtyKeypress: true
+
+URxvt.perl-ext-common: default,matcher,keyboard-select,tabbedex
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.tabbed.autohide: true
+URxvt.tabbed.tab-title: title
+URxvt.keysym.Control-t: perl:tabbedex:new_tab
+URxvt.keysym.Control-Tab: perl:tabbedex:next_tab
+URxvt.keysym.Control-Shift-Tab: perl:tabbedex:prev_tab
+
+URxvt.matcher.button: 1
+
+URxvt.inputMethod: ibus
+URxvt.preeditType: OverTheSpot
