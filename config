@@ -75,7 +75,7 @@ bindsym $mod+a focus parent
 workspace 1 output DVI-D-0
 workspace 2 output DVI-I-1
 workspace 3 output HDMI-0
-# switch to workspace
+# switch to Nautilus
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
 bindsym $mod+3 workspace 3
@@ -100,7 +100,7 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+bindsym $mod+Shifnautilus+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
@@ -137,7 +137,7 @@ for_window [class="mpv"] floating enable ; border none
 for_window [title="Library"] floating enable
 for_window [class="Vlc"] floating enable ; border none
 for_window [class="Steam"] floating enable
-for_window [class="Thunar"] floating enable 
+for_window [class="Nautilus"] floating enable 
 for_window [class="Thunar"] border normal 0
 for_window [class="Lxappearance"] floating enable
 for_window [window_role="pop-up"] floating enable
@@ -162,7 +162,7 @@ bindsym $mod+minus scratchpad show
 bindsym $mod+bracketright focus right
 bindsym $mod+bracketleft focus left
 
-bindsym $mod+f exec thunar
+bindsym $mod+f exec nautilus
 # Switching between workspaces
 bindsym $mod+Tab workspace back_and_forth
 # Pulse Audio controls
