@@ -72,9 +72,10 @@ bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
+# use `xrandr --query` to get monitor names
 workspace 1 output DVI-D-0
-workspace 2 output DVI-I-1
-workspace 3 output HDMI-0
+workspace 2 output DP-4
+# workspace 3 output HDMI-0
 # switch to Nautilus
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
@@ -249,7 +250,8 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color      
 bar {
     #enable transparent i3 bar
     # i3bar_command i3bar -t
-    tray_output DVI-I-1
+    output DP-4
+    # tray_output DVI-I-1
     position top
   	# status_command i3blocks -c ~/.config/i3/i3blocks.conf
     status_command ~/.config/i3/conky-i3.sh
