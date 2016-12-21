@@ -36,6 +36,10 @@ Wallpaper
 - pasystray
 volume control
 
+- xcap
+ cap key mod
+- compton
 
+- dunst
 
 ** i3 and Gnome shell
