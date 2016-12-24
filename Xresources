@@ -30,7 +30,7 @@ URxvt.bufferd: true
 URxvt.transparent: false
 URxvt.depth: 32
 ! URxvt.fading:      40
-URxvt.font:     xft:Consolas:size=13,xft:Microsoft YaHei:size=14
+URxvt.font:     xft:Consolas:size=11,xft:Microsoft YaHei:size=14
 ! URxvt.font: 9x15bold,xft:Bitstream Vera Sans Mono
 ! URxvt.font:        xft:Hack:size=11
 URxvt.letterSpace: -1

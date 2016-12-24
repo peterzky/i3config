@@ -17,6 +17,8 @@ bindsym $mod+q kill
 # bindsym $mod+d exec rofi -show window -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 12"
 bindsym $mod+space exec rofi -show run -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 12"
 # bindsym $mod+space exec rofi -show window -opacity "80" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 12"
+
+
 #-opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 14"
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
@@ -167,10 +169,10 @@ bindsym $mod+f exec nautilus
 # Switching between workspaces
 bindsym $mod+Tab workspace back_and_forth
 # Pulse Audio controls
-# bindsym F12 exec --no-startup-id amixer -D pulse sset Master 5%+
-# bindsym F11 exec --no-startup-id amixer -D pulse sset Master 5%-
-bindsym F12 exec --no-startup-id pactl set-sink-volume 2 +5%
-bindsym F11 exec --no-startup-id pactl set-sink-volume 2 -5%
+bindsym F12 exec --no-startup-id amixer -D pulse sset Master 5%+
+bindsym F11 exec --no-startup-id amixer -D pulse sset Master 5%-
+bindsym F10 exec --no-startup-id pactl set-default-sink 1
+bindsym F9 exec --no-startup-id pactl set-default-sink 2
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 # increase screen brightness
 bindsym XF86MonBrightnessDown exec  --no-startup-id xbacklight -dec 10 # decrease screen brightness
@@ -233,7 +235,8 @@ bindsym Pause mode "$mode_system"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 ## window colors
-set $bg-color 	         #2f343f
+# set $bg-color 	         #2f343f
+set $bg-color 	         #2d2d2d
 set $border 	           #2F925D
 set $inactive-bg-color   #2f343f
 set $text-color          #f3f4f5
@@ -268,21 +271,21 @@ bar {
 } 
 
 # exec --no-startup-id gnome-settings-daemon
-exec --no-startup-id thunar --daemon
-exec --no-startup-id blueman-applet
-exec --no-startup-id nm-applet
-exec --no-startup-id ibus-daemon --xim
-exec --no-startup-id pasystray
+# exec --no-startup-id thunar --daemon
+# exec --no-startup-id blueman-applet
+# exec --no-startup-id nm-applet
+exec --no-startup-id fcitx
+# exec --no-startup-id pasystray
 exec --no-startup-id dunst
 # disable screensaver 
-exec --no-startup-id xset -dpms
-exec --no-startup-id xset s off
+# exec --no-startup-id xset -dpms
+# exec --no-startup-id xset s off
 # exec --no-startup-id zeal
 exec --no-startup-id . /home/$USER/.config/i3/keyboard.sh
 # exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/space_planet_surface_shadow_46631_1920x1080.jpg
 # exec_always --no-startup-id feh --bg-scale /home/peterzky/Pictures/abstraction_geometry_shapes_colors_93400_1920x1080.jpg
-exec_always --no-startup-id feh --bg-fill ~/btsync/Screenshots/bgu.jpeg
-exec --no-startup-id compton --backend glx --vsync opengl-swc --unredir-if-possible --glx-no-stencil --glx-no-rebind-pixmap --xrender-sync-fence 
+exec_always --no-startup-id feh --bg-fill ~/btsync/Screenshots/pyramid.jpg
+exec --no-startup-id compton -o 0.0 --backend glx --vsync opengl-swc --unredir-if-possible --glx-no-stencil --glx-no-rebind-pixmap --xrender-sync-fence 
 
 # Gaps config
 gaps inner 8
