@@ -7,4 +7,4 @@ sleep 1
 # start x cape
 xcape -e 'Control_L=Escape'
 # set screensaver to 1 hour
-xset s 3600 3600
+# xset s 3600 3600
