@@ -276,7 +276,7 @@ bar {
 # exec --no-startup-id nm-applet
 exec --no-startup-id fcitx
 # exec --no-startup-id pasystray
-exec --no-startup-id dunst
+exec --no-startup-id dunst -config /home/$USER/.config/i3/dunst.conf
 # disable screensaver 
 # exec --no-startup-id xset -dpms
 # exec --no-startup-id xset s off
